@@ -7,8 +7,10 @@ const router = express.Router()
 require('dotenv').config()
 
 router.post('/signup', async (req,res) => {
+    if(req.body.username.length<3) return res.status(400).json({ error: "Username field should have atleast 3 characters"})
+    if(req.body.password.length<4) return res.status(400).json({ error: "Password field should have atleast 4 characters"})
+
     const username = req.body.username
-    
     bcrypt.hash(req.body.password, 10, (err, password) => {
         if(err) return res.status(500).json({ err });
 
