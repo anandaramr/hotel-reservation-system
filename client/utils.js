@@ -14,3 +14,8 @@ export const setCookie = (key,value) => {
 export const removeCookie = (key) => {
     document.cookie = `${key}=; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`
 }
+
+export const mode = () => {
+    localStorage.dark=localStorage.dark == 'true' ? 'false' : 'true'
+    document.documentElement.classList.toggle("dark")
+}
