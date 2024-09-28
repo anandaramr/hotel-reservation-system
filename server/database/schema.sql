@@ -8,7 +8,7 @@ create table users(
     phone varchar(13),
     address varchar(255),
     gender enum('Male', 'Female', 'Other', 'Prefer Not To Say') default 'Prefer Not To Say',
-    createdAt date not null default (CURRENT_DATE())
+    createdAt datetime not null default (CURRENT_TIMESTAMP())
 );
 
 create table Tokens(
