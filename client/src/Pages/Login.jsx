@@ -1,7 +1,9 @@
 import { Link, useNavigate } from "react-router-dom"
-import { mode, setCookie } from "../../utils"
+import { setCookie } from "../../utils"
 import { useAxios } from "../../Auth/axios"
 import { useState } from "react"
+import ToggleMode from "../Components/ToggleMode"
+
 
 function Login() {
 
@@ -29,8 +31,7 @@ function Login() {
     }
     return (
         <div className="dark:bg-gray-950 bg-slate-100 dark:text-white">
-            <button onClick={mode}><span className="material-symbols-outlined hidden absolute right-0 p-3 text-3xl dark:block text-white">light_mode</span></button>
-            <button onClick={mode}><span className="material-symbols-outlined absolute right-0 p-3 text-3xl dark:hidden ">dark_mode</span></button>
+            <ToggleMode/>
             <div className="flex h-svh w-full items-center justify-center font-sora">
                 <div className="flex flex-col items-center justify-center py-8 w-[27%] shadow-[0_0_15px_1px] shadow-rose-300 dark:shadow-sky-500 rounded-lg gap-4">
                     <div className="min-h-6 w-[80%] flex">{error && <div className="text-sm px-2 flex items-center justify-center gap-1 text-rose-500 dark:text-white border-2 w-full rounded-md border-rose-400 dark:border-cyan-400 text-wrap"><span className="material-symbols-outlined text-sm">info</span>{error}</div>}</div>
