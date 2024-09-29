@@ -9,7 +9,8 @@ export default {
     extend: {
       fontFamily: {
         "poppins": [ "Poppins", 'sans-serif' ],
-        "sora": [ "Sora", "sans-serif" ]
+        "sora": [ "Sora", "sans-serif" ],
+        "monte-carlo": ["MonteCarlo", "sans-serif"],
       },
     },
   },
