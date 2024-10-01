@@ -9,7 +9,10 @@ const authRouter = require('./routes/auth')
 app.use('/api/auth', authRouter)
 
 const userRouter = require('./routes/user')
-app.use('/api/user/', userRouter)
+app.use('/api/user', userRouter)
+
+const roomRouter = require('./routes/room')
+app.use('/api/room', roomRouter)
 
 app.listen(3000, () => {
     console.log('Listening at 3000')

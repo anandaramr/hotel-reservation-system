@@ -15,10 +15,10 @@ router.post('/signup', async (req,res) => {
         if(err) return res.status(500).json({ err });
 
         Pool.query(`INSERT INTO USERS(username, password) values(?,?)`, [ username, password ])
-        .then(result => {
+        .then(async result => {
             const data = { userId: result[0].insertId, username }
             const accessToken = getAccessToken(data)
-            const refreshToken = getRefreshToken(data)
+            const refreshToken = await getRefreshToken(data)
             res.status(201).json({ accessToken, refreshToken })
         })
         .catch(err => res.status(400).json({ message: err.message }))
@@ -79,7 +79,7 @@ router.post('/logout', authorize, (req,res) => {
 })
 
 function getAccessToken(data) {
-    return jwt.sign(data, process.env.ACCESSKEY, { expiresIn: '5s' })
+    return jwt.sign(data, process.env.ACCESSKEY, { expiresIn: '5m' })
 }
 
 async function getRefreshToken(data) {
