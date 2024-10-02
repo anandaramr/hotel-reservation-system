@@ -17,8 +17,9 @@ function Navbar()
                 <div className="flex flex-row  font-sora items-center gap-3 font-medium">
                     {!user && <Link to="/login" className="duration-150 hover:bg-black border-2 flex items-center px-4 h-fit py-1 border-black hover:text-white rounded-md"><span>Login</span></Link>}
                     {!user && <Link to="/signup" className="duration-150 bg-white hover:bg-black border-2 flex items-center px-4 h-fit py-1 border-white hover:border-black hover:text-white rounded-lg">Sign Up</Link>}
-                    {user && <Link to="/profile"><span className="material-symbols-outlined [font-variation-settings:'FILL'_1] text-white text-4xl">account_circle</span></Link>}
+                    {!isLoading &&user && <Link to="/profile"><span className="material-symbols-outlined [font-variation-settings:'FILL'_1] text-white text-4xl">account_circle</span></Link>}
                     {/* {user && <button onClick={logout}>Logout</button>} */}
+
                 </div>
             </div>}
             {isLoading && <p className="text-5xl text-center w-full text-white my-20">Loading</p>}
