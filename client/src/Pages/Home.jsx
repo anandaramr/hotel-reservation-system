@@ -17,11 +17,11 @@ function Home()
                         <div className="flex flex-row justify-between gap-2 w-full ">
                             <div className="flex gap-3 justify-center items-center">
                                 <label>From:</label>
-                                <input className="outline-none border-2 rounded-md border-rose-200 p-1" type="date" value={new Date().toISOString().slice(0,10)} name="blah" min = {new Date()}/>
+                                <input className="outline-none border-2 rounded-md border-rose-200 p-1" type="date" defaultValue={new Date().toISOString().slice(0,10)} name="blah" min = {new Date()}/>
                             </div>
                             <div className="flex gap-3 justify-center items-center">
                                 <label>To:</label>
-                                <input className="outline-none border-2 rounded-md border-rose-200 p-1" type="date" value={new Date().toISOString().slice(0,10)} name="blah" min = {new Date()}/>
+                                <input className="outline-none border-2 rounded-md border-rose-200 p-1" type="date" defaultValue={new Date().toISOString().slice(0,10)} name="blah" min = {new Date()}/>
                             </div>
                         </div>
                         <p className="">₹4000</p>
