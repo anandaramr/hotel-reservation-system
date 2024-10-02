@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { axiosJwt } from "./axios";
 import { getCookie, removeCookie } from "../utils";
 
@@ -6,10 +6,6 @@ const AuthContext = createContext()
 export default AuthContext
 
 export const AuthProvider = ({ children }) => {
-
-    useEffect(() => {
-        authorize()
-    }, [])
 
     const [user, setUser] = useState()
     const [isLoading, setIsLoading] = useState(true)
@@ -21,6 +17,7 @@ export const AuthProvider = ({ children }) => {
             setUser(res.data)
             setIsLoading(false)
         })
+        .catch(() => setIsLoading(false))
     }
 
     const logout = () => {
@@ -32,9 +29,10 @@ export const AuthProvider = ({ children }) => {
             setUser("")
             setIsLoading(false)
         })
+        .catch(() => setIsLoading(false))
     }
 
-    const data = { user, isLoading, logout }
+    const data = { user, isLoading, logout, authorize }
 
     return (
         <AuthContext.Provider value={data}>
