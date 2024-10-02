@@ -79,7 +79,7 @@ router.post('/logout', authorize, (req,res) => {
 })
 
 function getAccessToken(data) {
-    return jwt.sign(data, process.env.ACCESSKEY, { expiresIn: '5s' })
+    return jwt.sign(data, process.env.ACCESSKEY, { expiresIn: '5m' })
 }
 
 async function getRefreshToken(data) {

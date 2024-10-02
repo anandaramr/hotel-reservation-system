@@ -14,3 +14,37 @@ create table users(
 create table Tokens(
     token varchar(512) primary key not null
 );
+
+create table Rooms (
+    roomNo int primary key not null,
+    roomType enum('single', 'double', 'deluxe', 'suite', 'family') not null,
+    isAc boolean,
+    pricePerNight int unsigned not null
+);
+
+create table Orders (
+    orderId int unsigned primary key auto_increment,
+    userId int unsigned not null,
+    roomNo int not null,
+    totalPrice int unsigned not null,
+    createdAt datetime not null default NOW(),
+    startDate date not null default (CURRENT_DATE()),
+    expiryDate date not null,
+    cancelled datetime,
+    foreign key(userId) references Users(userId),
+    foreign key(roomNo) references Rooms(roomNo)
+);
+
+create table Reviews (
+    reviewId int unsigned primary key auto_increment,
+    userId int unsigned not null,
+    text varchar(255) not null
+);
+
+create table Menu (
+    itemId int unsigned primary key auto_increment,
+    itemName varchar(255) not null,
+    itemType enum('beverage', 'starter', 'rice', 'bread', 'dessert', 'salad', 'soup') not null,
+    isVeg boolean,
+    isAvailable boolean default true
+);
