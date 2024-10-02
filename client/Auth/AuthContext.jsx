@@ -10,9 +10,9 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState()
     const [isLoading, setIsLoading] = useState(true)
 
-    const authorize = () => {
+    const authorize = async () => {
         setIsLoading(true)
-        axiosJwt.get('/user')
+        await axiosJwt.get('/user')
         .then(res => {
             setUser(res.data)
             setIsLoading(false)

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import Dropdown from "../Components/Dropdown.jsx"
+import Dropdown from "../Components/DropDown.jsx"
 import Navbar from "../Components/Navbar.jsx"
 
 function Home()
