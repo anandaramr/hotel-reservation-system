@@ -8,8 +8,9 @@ export default AuthContext
 export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
+        console.log("hi")
         authorize()
-    }, [])
+    },[])
 
     const [user, setUser] = useState()
     const [isLoading, setIsLoading] = useState(true)
@@ -34,7 +35,7 @@ export const AuthProvider = ({ children }) => {
         })
     }
 
-    const data = { user, isLoading, logout }
+    const data = { user, isLoading, logout, authorize }
 
     return (
         <AuthContext.Provider value={data}>
