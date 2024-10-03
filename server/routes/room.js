@@ -47,19 +47,20 @@ router.post('/cancel/:orderId', authorize, (req,res) => {
 })
 
 router.get('/search', (req,res) => {
-    const start = req.query.start || (new Date()).toISOString().slice(0,10)
-    const expiry = req.query.expiry || start
+    const start = new Date(req.query.start).toISOString().slice(0,10)
+    const expiry = req.query.expiry ? new Date(req.query.expiry).toISOString().slice(0,10) : start
+    const interval = (new Date(expiry) - new Date(start)) / (1000 * 60 * 60 * 24) + 1
     
     if(new Date(start)=='Invalid Date' || new Date(expiry)=='Invalid Date')
         return res.status(400).json({ error: 'Invalid start/expiry date format (YYY-MM-DD)'});
     
     if(expiry<start) return res.status(400).json({ error: "Expiry date should not be before start date"})
 
-    Pool.query(`SELECT roomNo FROM ROOMS WHERE ROOMNO NOT IN(SELECT ROOMNO FROM ORDERS WHERE CANCELLED IS NULL AND (? BETWEEN STARTDATE AND EXPIRYDATE OR STARTDATE BETWEEN ? AND ?)) 
-        ${req.query.isAc=="true" ? "AND ISAC=1" : ""} ${req.query.isAc=="false" ? "AND ISAC=0" : ""} ${req.query.roomType ? 'AND ROOMTYPE=?' : ''}`,
-        [start, start, expiry, req.query.roomType]
+    Pool.query(`SELECT roomNo, pricePerNight, roomType, isAc FROM ROOMS WHERE ROOMNO NOT IN(SELECT ROOMNO FROM ORDERS WHERE CANCELLED IS NULL AND (? BETWEEN STARTDATE AND EXPIRYDATE OR STARTDATE BETWEEN ? AND ?)) 
+        ${req.query.isAc=="1" ? "AND ISAC=1" : ""} ${req.query.isAc=="0" ? "AND ISAC=0" : ""} ${req.query.roomType ? 'AND ROOMTYPE=?' : ''}`,
+        [ start, start, expiry, req.query.roomType ]
     ).then(result => {
-        const rows = result[0].map(item => item.roomNo)
+        const rows = result[0].map(item => {return { ...item, totalPrice: item.pricePerNight * interval }})
         res.status(200).json(rows)
     }).catch(err => res.status(400).json({ error: err.message }))
 })
