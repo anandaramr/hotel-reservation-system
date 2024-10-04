@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Navbar from "../Components/Navbar"
-import { useAxios } from "../../Auth/axios"
+import { axiosJwt, useAxios } from "../../Auth/axios"
 import DropDown from "../Components/DropDown"
+import AuthContext from "../../Auth/AuthContext"
+import { useNavigate } from "react-router-dom"
 
 export default function Search() {
 
@@ -9,6 +11,9 @@ export default function Search() {
     const [ rooms, setRooms ] = useState([])
     const [ start, setStart ] = useState(new Date().toISOString().slice(0,10))
     const [ expiry, setExpiry ] = useState(new Date().toISOString().slice(0,10))
+
+    const { user, isLoading } = useContext(AuthContext)
+    const navigate = useNavigate()
     
     const urlParams = new URLSearchParams(window.location.search)
     const [ roomType, setRoomType ] = useState(urlParams.get('roomType'))
@@ -25,6 +30,14 @@ export default function Search() {
         .then(res => {
             setRooms(res.data)
         })
+    }
+
+    function book(roomNo) {
+        axiosJwt.post(`/room/book/${roomNo}`, { start, expiry })
+        .then(() => setRooms(rooms => rooms.map(room => {
+            if(room.roomNo==roomNo) return { ...room, booked: true };
+            return room
+        })))
     }
 
     return(
@@ -51,20 +64,23 @@ export default function Search() {
                     </div>
 
                     <div className="flex flex-col gap-3">
-                        <div className="flex flex-wrap text-lg justify-between px-5">
+                        <div className="flex flex-wrap text-lg justify-around">
 
-                            {rooms.map((item,index)=>
-                            <div key={index} className="group grid grid-col-3 border-2 my-2 justify-between items-center rounded-lg py-5 px-3 w-[45%] border-gray-950">
-                                <div className="col-start-1 flex flex-col items-center gap-1 self-end translate-y-5 scale-125 group-hover:scale-100 group-hover:translate-y-0 duration-300">
-                                    <p className="px-2 font-bold">{item.roomNo}</p>
+                            {rooms.length>0 && rooms.map((item,index)=>
+                            <div key={index} className="group flex gap border-2 my-2 justify-between items-center rounded-lg py-5 px-3 w-fit border-gray-950">
+                                <div className="w-36 flex flex-col items-center gap-1 self-end translate-y-5 scale-125 group-hover:scale-100 group-hover:translate-y-0 duration-300">
+                                    <p className="font-bold">{item.roomNo}</p>
                                     <div className="flex scale-0 group-hover:scale-90 duration-300 cursor-default select-none gap-1">
                                         <span className="text-xs border-2 border-gray-950 rounded-full py-1 px-2 hover:bg-rose-50 duration-200">{item.roomType}</span>
                                         <span className="text-xs border-2 border-gray-950 rounded-full py-1 px-2 hover:bg-rose-50 duration-200">{item.isAc==1 ? "AC" : "non-AC"}</span>
                                     </div>
                                 </div>
-                                <p className="p-2 col-start-2 text-xl">₹{item.totalPrice}</p>
-                                <button className="px-6 py-2 col-start-3 w-fit h-fit select-none hover:bg-rose-50 hover:text-black duration-150  rounded-lg border-2 bg-gray-950 border-gray-950 text-white">Book</button>
+                                <p className="py-2 px-8 basis-1/4 text-xl">₹{item.totalPrice}</p>
+                                {!isLoading && user && <button onClick={() => book(item.roomNo)} disabled={item.booked} className={`px-6 py-2 basis-1/4 w-fit h-fit select-none duration-200  rounded-lg border-2 ${item.booked ? 'bg-transparent border-emerald-500 text-emerald-500' : 'bg-gray-950 border-gray-950 hover:bg-rose-50 hover:text-black text-white'}`}>{ item.booked ? 'Booked!' : 'Book'}</button>}
+                                {!isLoading && !user && <button onClick={() => navigate('/login?redirect=/search?roomType=single&isAc=1')} disabled={item.booked} className="px-6 py-2 basis-1/4 w-fit h-fit select-none duration-200  rounded-lg border-2 bg-gray-950 border-gray-950 hover:bg-gray-800 hover:border-gray-800 text-white">Login</button>}
                             </div>)}
+
+                            {!rooms.length && <p>No results found!</p> }
                         </div>
                     </div>
                 </div>
