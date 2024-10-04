@@ -1,13 +1,16 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { setCookie } from "../../utils"
 import { useAxios } from "../../Auth/axios"
 import { useNavigate } from "react-router-dom"
 import ToggleMode from "../Components/ToggleMode"
+import AuthContext from "../../Auth/AuthContext"
 
 function Signup() { 
 
     const [error, setError] = useState("")
     const [usernameExists, setUsernameExists] = useState(false)
+    const { authorize } = useContext(AuthContext)
+
     const axios = useAxios()
     const navigate = useNavigate()
 
@@ -31,7 +34,10 @@ function Signup() {
             if(res.data.error) return;
             setCookie('auth', res.data.accessToken)
             setCookie('ref', res.data.refreshToken)
-            navigate('/')
+            authorize()
+            
+            const redirect = new URLSearchParams(window.location.search).get('redirect')
+            navigate(`${ redirect ? redirect : '/' }`)
         })
         .catch(err => setError(err.response.data.error))
     }

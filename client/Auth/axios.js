@@ -3,20 +3,22 @@ import { jwtDecode } from 'jwt-decode'
 import { getCookie, setCookie } from '../utils';
 
 const baseURL = 'http://localhost:3000/api'
-const controller = new AbortController();
 
 export function useAxios() {
     return axios.create({ baseURL })
 }
 
-export const axiosJwt = axios.create({ baseURL, signal: controller.signal })
+export const axiosJwt = axios.create({ baseURL })
 
 axiosJwt.interceptors.request.use(async config => {
     const token = getCookie('auth')
+    const controller = new AbortController()
+
     if(!token) {
+        config.signal = controller.signal
         controller.abort()
         return config;
-    };
+    }
     
     const data = jwtDecode(token)
     const date = new Date()
@@ -31,7 +33,7 @@ axiosJwt.interceptors.request.use(async config => {
 axiosJwt.interceptors.response.use(res => res,
     err => {
         if(err.code=="ERR_CANCELED") return Promise.resolve(err);
-        return Promise.reject(err)
+        Promise.reject(err)
     }
 )
 
