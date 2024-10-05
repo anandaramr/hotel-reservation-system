@@ -28,7 +28,7 @@ export default function Search() {
     }
 
     return(
-        <div className="bg-[url('./src/assets/back2.jpg')] bg-fixed bg-cover min-h-svh opacity-70 pb-16">
+        <div className="bg-[url('./src/assets/back2.png')] bg-fixed bg-cover min-h-svh opacity-70 pb-16">
             <Navbar/>
 
             <div className="flex justify-center mt-5 mb-48 h-fit">
