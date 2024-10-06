@@ -62,7 +62,7 @@ router.get('/search', (req,res) => {
 })
 
 router.get('/orders', authorize, (req,res) => {
-    Pool.query(`SELECT * FROM ORDERS WHERE USERID=? ${req.query.active=="true" && 'AND CANCELLED IS NULL AND EXPIRYDATE>=CURDATE()'}`, [res.user.userId])
+    Pool.query(`SELECT * FROM ORDERS WHERE USERID=? ${req.query.active=="true" ? 'AND CANCELLED IS NULL AND EXPIRYDATE>=CURDATE()' : ''}`, [res.user.userId])
     .then(result => {
         res.status(200).json(result[0])
     })

@@ -5,15 +5,15 @@ import { useContext, useEffect } from "react"
 function Navbar() {
     const { user, isLoading, authorize, logout } = useContext(AuthContext)
 
-    useEffect(()=>{
+    useEffect(() => {
         authorize()
     }, [])
 
-    return(
+    return (
         <div className="sticky top-0">
             <div className="flex flex-row justify-between p-5 select-none">
 
-                <p className="font-sora text-5xl text-white font-semibold">Serene</p>
+                <Link to='/' className="font-sora text-5xl text-white font-semibold">Serene</Link>
                 <div className="flex flex-row  font-sora items-center gap-3 font-medium">
                     {!user && <Link to={`/login${window.location.pathname=='/' ? '' : '?redirect=' + window.location.pathname + window.location.search}`} className={`${isLoading && 'pointer-events-none bg-gray-300 text-transparent animate-pulse'} duration-150 hover:bg-black ${!isLoading ? 'border-2' : 'border-0'} flex items-center px-4 h-fit py-1 border-black hover:text-white rounded-md`}><span>Login</span></Link>}
                     {!user && <Link to={`/signup${window.location.pathname=='/' ? '' : '?redirect=' + window.location.pathname + window.location.search}`} className={`${isLoading && 'pointer-events-none bg-gray-300 text-transparent animate-pulse'} duration-150 bg-white hover:bg-black ${!isLoading ? 'border-2' : 'border-0'} flex items-center px-4 h-fit py-1 border-white hover:border-black hover:text-white rounded-lg`}>Sign Up</Link>}
@@ -24,4 +24,5 @@ function Navbar() {
         </div>
     )
 }
+
 export default Navbar
