@@ -1,8 +1,8 @@
-function Profile()
+function Profile({ children })
 {
     return(
-        <div className="">
-            Profile
+        <div className="bg-white text-red-700">
+            { children }
         </div>
     )
 }
