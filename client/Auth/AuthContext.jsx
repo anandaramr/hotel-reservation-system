@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { axiosJwt } from "./axios";
 import { getCookie, removeCookie } from "../utils";
 
@@ -7,17 +7,24 @@ export default AuthContext
 
 export const AuthProvider = ({ children }) => {
 
-    const [user, setUser] = useState()
-    const [isLoading, setIsLoading] = useState(true)
+    const [ user, setUser ] = useState()
+    const [ isLoading, setIsLoading ] = useState(true)
 
-    const authorize = async () => {
+    useEffect(() => {
+        authorize()
+    }, [])
+
+    const authorize = () => {
         setIsLoading(true)
-        await axiosJwt.get('/user')
+        axiosJwt.get('/user')
         .then(res => {
             setUser(res.data)
             setIsLoading(false)
         })
-        .catch(() => setIsLoading(false))
+        .catch((err) => {
+            console.log(err)
+            setIsLoading(false)
+        })
     }
 
     const logout = () => {

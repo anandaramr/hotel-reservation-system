@@ -1,8 +1,9 @@
 import { Link, useNavigate } from "react-router-dom"
 import { setCookie } from "../../utils"
 import { useAxios } from "../../Auth/axios"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import ToggleMode from "../Components/ToggleMode"
+import AuthContext from "../../Auth/AuthContext"
 
 
 function Login() {
@@ -10,6 +11,8 @@ function Login() {
     const axios = useAxios()
     const [error, setError] = useState("")
     const navigate = useNavigate()
+
+    const { authorize } = useContext(AuthContext)
 
     const login = (evt) => {
         evt.preventDefault()
@@ -25,7 +28,10 @@ function Login() {
             if(res.data.error) return setError(res.data.error);
             setCookie('auth', res.data.accessToken)
             setCookie('ref', res.data.refreshToken)
-            navigate('/')
+            authorize()
+
+            const redirect = new URLSearchParams(window.location.search).get('redirect')
+            navigate(`${ redirect ? redirect : '/' }`)
         })
         .catch(err => setError(err.response.data.error))
     }

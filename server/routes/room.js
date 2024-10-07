@@ -3,19 +3,15 @@ const Pool = require('../database/pool')
 const { authorize } = require('../utils')
 const router = express.Router()
 
-
 router.post('/book/:roomNo', authorize, async (req,res) => {
-    const interval = req.body.interval;
-    if(!interval || interval<=0) return res.status(400).json({ error: "Invalid req.body.interval" });
-    
-    let start = req.body.start ? new Date(req.body.start) : new Date()
-    if(start<new Date()) return res.status(400).json({ error: "Invalid start date" });
-    
-    let expiry = new Date(start);
-    expiry.setDate(expiry.getDate() + interval - 1);
-    
-    start = start.toISOString().slice(0,10)
-    expiry = expiry.toISOString().slice(0,10)
+    const start = new Date(req.body.start).toISOString().slice(0,10)
+    const expiry = req.body.expiry ? new Date(req.body.expiry).toISOString().slice(0,10) : start
+
+    if(new Date(start)=='Invalid Date' || new Date(expiry)=='Invalid Date')
+        return res.status(400).json({ error: 'Invalid start/expiry date format (YYY-MM-DD)'});
+
+    const interval = (new Date(expiry) - new Date(start)) / (1000 * 60 * 60 * 24) + 1
+    if(interval<=0 || start<new Date().toISOString().slice(0,10)) return res.status(400).json({ error: "Invalid start/expiry date" })
     
     const result = await Pool.query('SELECT * FROM ORDERS WHERE ROOMNO=? AND (STARTDATE BETWEEN ? AND ? OR ? BETWEEN STARTDATE AND EXPIRYDATE) AND CANCELLED IS NULL',
         [req.params.roomNo, start, expiry, start]
