@@ -40,12 +40,15 @@ export default function Search() {
     }
 
     return(
+
         <div className="bg-[url('./src/assets/back2.png')] bg-fixed bg-cover min-h-svh opacity-70 pb-16">
             <Navbar/>
 
-            <div className="flex justify-center mt-5 mb-48 h-fit">
-                    <DropDown defaultRoomType={roomType} defaultIsAc={isAc} setRoomType={setRoomType} setIsAc={setIsAc} submit={submit} />
-            </div>
+
+                <div className="flex justify-center mt-5 mb-48 h-fit">
+                        <DropDown defaultRoomType={roomType} defaultIsAc={isAc} setRoomType={setRoomType} setIsAc={setIsAc} submit={submit} />
+                </div>
+
 
             <div className="flex justify-center">
                 <div className={`bg-white  w-[65%] px-16 py-8 rounded-lg flex flex-col gap-10`}>
@@ -60,11 +63,12 @@ export default function Search() {
                             <input onChange={(evt) => setStart(evt.target.value)} className="outline-none border-2 rounded-md border-gray-600 p-1" id="start" type="date" defaultValue={new Date().toISOString().slice(0,10)} name="blah" min = {new Date().toISOString().slice(0,10)} />
                         </div>
 
-                        <div className="flex gap-3 justify-center items-center">
-                            <label>To:</label>
-                            <input onChange={(evt) => setExpiry(evt.target.value)} className="outline-none border-2 rounded-md border-gray-600 p-1" id="expiry" type="date" defaultValue={new Date().toISOString().slice(0,10)} name="blah" min = {new Date().toISOString().slice(0,10)}/>
+                            <div className="flex gap-3 justify-center items-center">
+                                <label>To:</label>
+                                <input onChange={(evt) => setExpiry(evt.target.value)} className="outline-none border-2 rounded-md border-gray-600 p-1" id="expiry" type="date" defaultValue={new Date().toISOString().slice(0,10)} name="blah" min = {new Date().toISOString().slice(0,10)}/>
+                            </div>
                         </div>
-                    </div>
+
 
                     <div className="flex flex-col gap-3">
                         <div className="flex flex-wrap text-lg justify-around">

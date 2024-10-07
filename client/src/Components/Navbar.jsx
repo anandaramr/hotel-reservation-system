@@ -4,16 +4,19 @@ import { useContext, useEffect } from "react"
 import { useState } from "react"
 
 function Navbar() {
+
     const { user, isLoading, authorize, logout} = useContext(AuthContext)
     const [hide,setHide] = useState("64")
     const [hideIcon,setHideIcon] = useState("")
     useEffect(()=>{
+
         authorize()
     }, [])
 
-    return(
+    return (
         <div className="sticky top-0">
             <div className="flex flex-row justify-between p-5 select-none">
+
 
                 <Link to = "/">
                     <p className="font-sora text-5xl text-white font-semibold">Serene</p>
@@ -29,10 +32,10 @@ function Navbar() {
                         <p onClick={()=>{logout();setHide("64"); setHideIcon("") }} className=" hover:bg-rose-100 p-3 px-7 rounded-lg flex items-center gap-2"><span  className="material-symbols-outlined">logout</span>Logout</p>
                         <p onClick={()=>{setHide("64"); setHideIcon("")}} className=" hover:bg-rose-100 p-3 px-7 rounded-lg flex items-center gap-2"><span  className="material-symbols-outlined">close</span>Close</p>
                     </div>
-
                 </div>
             </div>
         </div>
     )
 }
+
 export default Navbar

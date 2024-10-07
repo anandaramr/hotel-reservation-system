@@ -50,7 +50,7 @@ function Login() {
                         <input type="text" placeholder="Username" spellCheck="false" autoComplete="off" className="dark:hover:border-sky-400  dark:border-sky-200 dark:focus:border-sky-400 bg-transparent w-full px-2  m-2 outline-none border-b-2  duration-200 focus:border-rose-400 border-b-rose-200 hover:border-red-400"/>
                         <input type="password" placeholder="Password" spellCheck="false" autoComplete="off" className="dark:hover:border-sky-400 dark:border-sky-200 dark:focus:border-sky-400 bg-transparent w-full px-2 m-2 duration-200 outline-none border-b-2 focus:border-rose-400 border-b-rose-200 hover:border-red-400"/>
                         <button className="py-1 px-5 dark:hover:border-sky-400 dark:border-sky-200 dark:focus:border-sky-400 dark:hover:bg-sky-400 hover:bg-rose-400 border-2 border-rose-400 rounded-lg w-fit hover:text-white duration-150 my-8">Login</button>
-                        <div className="flex flex-row text-sm items-center justify-center gap-2"><p className="">Don&apos;t have an account</p><Link to="/signup" className="hover:underline">Sign Up <span className="material-symbols-outlined text-sm text-center ">open_in_new</span></Link></div>
+                        <div className="flex flex-row text-sm items-center justify-center gap-1"><p className="">Don&apos;t have an account?</p><Link to="/signup" className="hover:underline font-semibold text-cyan-300">Sign Up!</Link></div>
                     </form>
                 </div>
             </div>

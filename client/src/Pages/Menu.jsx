@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Navbar from "../Components/Navbar";
 
 export default function Menu(){
 
@@ -20,11 +20,11 @@ export default function Menu(){
 
     return(
         <div className="bg-[url('./src/assets/menudark.avif')] bg-cover bg-fixed">
-            <Link to = "/"><span className="material-symbols-outlined text-5xl text-white p-3">home</span></Link>
+            <Navbar />
             <div className="min-h-svh flex justify-center font-teko">
 
                 <div className="m-16 bg-cyan-50 w-[60%] flex flex-col p-3 rounded-3xl">
-                    <h1 className="text-6xl text-center mb-3 font-monte-carlo">Menu</h1>
+                    <h1 className="text-6xl text-center mb-3 font-monte-carlo select-none">Menu</h1>
 
                     <div className="flex flex-wrap justify-center gap-3">
                         <div className="w-[40%] border-cyan-400 border-2 rounded-md py-2 px-5 flex flex-col">
