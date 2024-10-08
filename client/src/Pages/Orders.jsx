@@ -1,4 +1,4 @@
-import Profile from "../Pages/Profile"
+import Profile from "./Profile"
 
 export default function Orders()
 {
