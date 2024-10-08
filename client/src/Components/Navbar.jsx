@@ -16,8 +16,6 @@ function Navbar() {
     return (
         <div className="sticky top-0">
             <div className="flex flex-row justify-between p-5 select-none">
-
-
                 <Link to = "/">
                     <p className="font-sora text-5xl text-white font-semibold">Serene</p>
                 </Link>
@@ -26,11 +24,11 @@ function Navbar() {
                     {!user && <Link to={`/signup${window.location.pathname=='/' ? '' : '?redirect=' + window.location.pathname + window.location.search}`} className={`${isLoading && 'pointer-events-none bg-gray-300 text-transparent animate-pulse'} duration-150 bg-white hover:bg-black ${!isLoading ? 'border-2' : 'border-0'} flex items-center px-4 h-fit py-1 border-white hover:border-black hover:text-white rounded-lg`}>Sign Up</Link>}
                     {!isLoading && user && <span onClick={()=>{setHide("0"); setHideIcon("hidden")}} className={`${hideIcon} material-symbols-outlined [font-variation-settings:'FILL'_1] text-white text-4xl`}>account_circle</span>}
                     <div className={`fixed top-0 right-0 bg-white flex flex-col text-xl gap-7 py-8 px-5 z-50 min-h-svh o translate-x-${hide} duration-300`}>
-                        <Link to="/account" className="hover:bg-rose-100 p-3 rounded-lg flex items-center gap-2 px-7 "><span className="material-symbols-outlined">person</span>Account</Link>
-                        <Link to="/settings" className="hover:bg-rose-100 p-3 rounded-lg flex items-center gap-2 px-7 "><span className="material-symbols-outlined">settings</span>Settings</Link>
-                        <Link to="/orders" className="hover:bg-rose-100 p-3 rounded-lg flex items-center gap-2 px-7 "><span className="material-symbols-outlined">package_2</span>Orders</Link>
-                        <p onClick={()=>{logout();setHide("64"); setHideIcon("") }} className=" hover:bg-rose-100 p-3 px-7 rounded-lg flex items-center gap-2"><span  className="material-symbols-outlined">logout</span>Logout</p>
-                        <p onClick={()=>{setHide("64"); setHideIcon("")}} className=" hover:bg-rose-100 p-3 px-7 rounded-lg flex items-center gap-2"><span  className="material-symbols-outlined">close</span>Close</p>
+                        <Link to="/account" className="hover:bg-rose-100 p-3 rounded-lg flex items-center gap-2 px-7 duration-150 "><span className="material-symbols-outlined">person</span>Account</Link>
+                        <Link to="/settings" className="hover:bg-rose-100 p-3 rounded-lg flex items-center gap-2 px-7 duration-150 "><span className="material-symbols-outlined">settings</span>Settings</Link>
+                        <Link to="/orders" className="hover:bg-rose-100 p-3 rounded-lg flex items-center gap-2 px-7 duration-150 "><span className="material-symbols-outlined">package_2</span>Orders</Link>
+                        <p onClick={()=>{logout();setHide("64"); setHideIcon("") }} className=" hover:bg-rose-100 hover:text-rose-600 duration-150 p-3 px-7 rounded-lg flex items-center gap-2"><span  className="material-symbols-outlined">logout</span>Logout</p>
+                        <p onClick={()=>{setHide("64"); setHideIcon("")}} className=" hover:bg-rose-100 p-3 duration-150 px-7 rounded-lg flex items-center gap-2"><span  className="material-symbols-outlined">close</span>Close</p>
                     </div>
                 </div>
             </div>

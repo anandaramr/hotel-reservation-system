@@ -1,10 +1,10 @@
-import Profile from "../Pages/Profile"
+import Profile from "./Profile"
 
 export default function Account()
 {
     return(
     <Profile>
-        <p className="">Account</p>
+        
     </Profile>
     )
 }
