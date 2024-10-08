@@ -1,4 +1,3 @@
-import { useAxios } from "../../Auth/axios"
 import { axiosJwt } from "../../Auth/axios"
 import Profile from "./Profile"
 import { useEffect } from "react"
@@ -6,7 +5,6 @@ import { useState } from "react"
 
 export default function Orders()
 {
-    const axios= useAxios()
     const [order,setOrder]= useState()
 
     useEffect(()=>{
@@ -28,7 +26,7 @@ export default function Orders()
     function cancel(item)
     {
         axiosJwt.post(`/room/cancel/${item.orderId}`)
-        .then(res => setOrder(o=> {
+        .then(() => setOrder(o=> {
             return o.map(i => {
                 if(i == item) return {...item, cancelled: true }
                 return i

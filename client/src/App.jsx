@@ -39,9 +39,9 @@ function App() {
 function Loading() {
   return (
     <div className='flex flex-col justify-center items-center h-svh gap-3 dark:bg-gray-950'>
-			<img className='saturate-[0.5]' src="/logo.svg" height={50} width={50} />
-			<span className='text-gray-600 font-medium text-3xl animate-pulse dark:text-gray-300'>Loading...</span>
-		</div>
+            <img className='saturate-[0.5]' src="/logo.svg" height={50} width={50} />
+            <span className='text-gray-600 font-medium text-3xl animate-pulse dark:text-gray-300'>Loading...</span>
+        </div>
   )
 }
 
