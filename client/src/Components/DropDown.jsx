@@ -67,7 +67,7 @@ function DropDown({ defaultRoomType, defaultIsAc, setRoomType, setIsAc, submit }
                 {/* Search */}
                 <div className="col-start-5 col-span-1 flex justify-center h-fit">
                     <Link onClick={submit} to={`/search?roomType=${room.val}&isAc=${ac.val}`}>
-                        <button className="rounded-xl hover:bg-white hover:text-black text-white  px-8 py-2 duration-150 bg-black">Search</button>
+                        <button className="rounded-xl hover:bg-white hover:text-black text-white  px-8 py-2 duration-200 bg-gray-950">Search</button>
                     </Link>
                 </div>
             </div>

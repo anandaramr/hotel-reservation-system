@@ -1,10 +1,3 @@
-
-import Signup from "./Pages/Signup"
-import Login from './Pages/Login'
-import Home from "./Pages/Home"
-import Menu from "./Pages/Menu"
-
-import Search from "./Pages/Search"
 import Account from './Components/Account'
 import Settings from './Components/Settings'
 import Orders from "./Components/Orders"
@@ -15,7 +8,6 @@ import { lazy, useEffect, Suspense } from "react"
 const Signup = lazy(() => import("./Pages/Signup"))
 const Login = lazy(() => import("./Pages/Login"))
 const Home = lazy(() => import("./Pages/Home"))
-const Profile = lazy(() => import("./Pages/Profile"))
 const Menu = lazy(() => import("./Pages/Menu"))
 const Search = lazy(() => import("./Pages/Search"))
 
