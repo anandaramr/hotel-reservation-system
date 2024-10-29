@@ -36,9 +36,10 @@ create table Orders (
 );
 
 create table Reviews (
-    reviewId int unsigned primary key auto_increment,
-    userId int unsigned not null,
-    text varchar(255) not null
+    userId int unsigned primary key unique,
+    text varchar(255) not null,
+    createdAt datetime not null default NOW(),
+    foreign key(userId) references Users(userId)
 );
 
 create table Menu (

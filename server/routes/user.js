@@ -19,4 +19,14 @@ router.get('/search/exact/:username', (req,res) => {
     })
 })
 
+router.post('/review', authorize, (req,res) => {
+    const text = req.body.text
+    if(!text) return res.status(400).json({ error: "Text not found" });
+
+    Pool.query('INSERT INTO REVIEWS(USERID, TEXT) VALUES (?,?)', [res.user.userId, text])
+    .then(result => {
+        res.status(201).json(result)
+    })
+})
+
 module.exports = router
