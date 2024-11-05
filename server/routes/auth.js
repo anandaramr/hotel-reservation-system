@@ -37,7 +37,7 @@ router.post('/login', async (req,res) => {
         if(err) return res.status(500).json({ error: "Server error" })
         if(!result) return res.status(200).json({ error: "Wrong Password" });
 
-        const data = { userId: user.userid, username: user.username }
+        const data = { userId: user.userId, username: user.username }
         const accessToken = getAccessToken(data)
         const refreshToken = await getRefreshToken(data)
         res.status(201).json({ accessToken, refreshToken })
