@@ -23,10 +23,14 @@ router.post('/review', authorize, (req,res) => {
     const text = req.body.text
     if(!text) return res.status(400).json({ error: "Text not found" });
 
-    Pool.query('INSERT INTO REVIEWS(USERID, TEXT) VALUES (?,?)', [res.user.userId, text])
-    .then(result => {
-        res.status(201).json(result)
+    Pool.query('DELETE FROM REVIEWS WHERE USERID=?', [res.user.userId])
+    .then(() => {
+        Pool.query('INSERT INTO REVIEWS(USERID, TEXT) VALUES (?,?)', [res.user.userId, text])
+        .then(result => {
+            res.status(201).json(result)
+        })
     })
+
 })
 
 router.get('/review', (req,res) => {
@@ -35,6 +39,15 @@ router.get('/review', (req,res) => {
     Pool.query(`SELECT U.userId, U.username, R.text FROM (REVIEWS R JOIN USERS U ON R.USERID=U.USERID) ${username ? 'WHERE U.USERNAME!=?' : ''} ORDER BY R.CREATEDAT DESC`, [username])
     .then(result => {
         res.status(200).json(result[0])
+    })
+})
+
+router.get('/review/:userId', (req,res) => {
+    const { userId } = req.params
+
+    Pool.query('SELECT text FROM REVIEWS WHERE USERID=?', [userId])
+    .then(result => {
+        res.status(200).json(result[0][0])
     })
 })
 
