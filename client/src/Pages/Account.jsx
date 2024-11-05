@@ -4,15 +4,9 @@ export default function Account()
 {
     return(
     <Profile>
-<<<<<<< HEAD
-        
-    </Profile>
-    )
-}
-=======
         <div className="bg-[url('./src/assets/assets/back2.png')] bg-cover bg-fixed">
             <div className="min-h-svh flex justify-center">
-                <div className="m-10 bg-gray-100 w-fit flex flex-col p-3 rounded-lg px-16 gap-5">
+                <div className="m-10 bg-gray-100 w-96 flex flex-col p-3 rounded-lg px-16 gap-5">
                     <p className="font-poppins font-semibold text-center text-3xl">User Profile</p>
                     <div className="mb-2">
                         <p className="mb-1">Username:</p>
@@ -60,4 +54,3 @@ export default function Account()
     )
 }
 
->>>>>>> c6b3e9c0c6be27bc4ff7a1a8e16039e259dcc19c
