@@ -30,6 +30,7 @@ function Navbar() {
                     {!isLoading && user && <div className={`fixed top-0 w-[15%] ${showMenu ? "right-0" : "-right-[15%]"} bg-white flex flex-col text-xl gap-7 py-8 px-5 z-50 min-h-svh duration-500 ease-in-out`}>
                         <Link to="/account" className="hover:bg-rose-100 p-3 rounded-lg flex items-center gap-2 px-7 "><span className="material-symbols-outlined">person</span>Account</Link>
                         <Link to="/orders" className="hover:bg-rose-100 p-3 rounded-lg flex items-center gap-2 px-7 "><span className="material-symbols-outlined">package_2</span>Orders</Link>
+                        <Link to="/menu" className="hover:bg-rose-100 p-3 rounded-lg flex items-center gap-2 px-7 "><span className="material-symbols-outlined">restaurant</span>Menu</Link>
                         <p onClick={() => { setShowMenu(false); setShowDialog(true) }} className=" hover:bg-rose-100 p-3 px-7 rounded-lg flex items-center gap-2">
                             <span  className="material-symbols-outlined">logout</span>Logout
                         </p>

@@ -30,7 +30,7 @@ router.post('/login', async (req,res) => {
     const username = req.body.username
     const password = req.body.password
 
-    const [[user]] = await Pool.query('SELECT * FROM USERS WHERE USERNAME=?;', [username])
+    const [[user]] = await Pool.query('SELECT userId,username,password FROM USERS WHERE USERNAME=?;', [username])
     if(!user) return res.status(200).json({ error: "User not found" });
 
     bcrypt.compare(password, user.password, async (err, result) => {
