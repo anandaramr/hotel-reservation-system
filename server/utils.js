@@ -7,7 +7,7 @@ function authorize(req,res,next) {
 
     jwt.verify(token, process.env.ACCESSKEY, (err, result) => {
         if(err) return res.status(403).json({ error: err.message });
-
+        console.log(result)
         res.user = result
         next()
     })
